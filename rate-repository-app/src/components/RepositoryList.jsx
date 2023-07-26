@@ -62,7 +62,7 @@ const RepositoryList = () => {
       data={repositories}
       ItemSeparatorComponent={ItemSeparator}
       renderItem={({ item }) => (
-        <RepositoryItem item={item} />
+        <RepositoryItem repo={item} />
       )
       }
     />

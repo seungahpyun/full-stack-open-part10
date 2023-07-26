@@ -4,8 +4,11 @@ const theme = {
   colors: {
     textPrimary: "#24292e",
     textSecondary: "#586069",
-    textTertiary: "#ffffff",
     primary: "#0366d6",
+    backgroundBarColor: "#1E202B",
+    backgroundMainColor: "#e1e4e8",
+    whiteColor: "#FFFFFF",
+    blueColor: "#0366d6",
   },
   fontSizes: {
     body: 14,
@@ -19,8 +22,13 @@ const theme = {
     bold: "700",
   },
   padding: {
-    top: Constants.statusBarHeight,
-    bottom: 20,
+    paddingTop: Constants.statusBarHeight,
+    paddingBottom: 5,
+  },
+  margin: {
+    small: 5,
+    medium: 10,
+    large: 15,
   },
 };
 

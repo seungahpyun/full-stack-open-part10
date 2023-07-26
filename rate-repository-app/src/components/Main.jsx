@@ -1,19 +1,20 @@
 import { StyleSheet, View } from 'react-native';
-import Appbar from './AppBar';
+import theme from '../theme';
 import RepositoryList from './RepositoryList';
-
+import AppBar from './AppBar';
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: theme.colors.backgroundMainColor,
+    paddingBottom: theme.padding.paddingBottom,
     flexGrow: 1,
-    flexShrink: 1,
   },
 });
 
 const Main = () => {
   return (
     <View style={styles.container}>
-      <Appbar />
+      <AppBar />
       <RepositoryList />
     </View>
   );
