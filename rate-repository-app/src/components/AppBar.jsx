@@ -1,6 +1,7 @@
 import { View, StyleSheet } from 'react-native';
 import theme from '../theme';
 import AppBarTab from './AppBarTab';
+import { ScrollView } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,8 +15,10 @@ const styles = StyleSheet.create({
 const AppBar = () => {
   return (
     <View style={styles.container}>
-      <AppBarTab title="Repositories" path='/'/>
-      <AppBarTab title="Sign In" path='/sign-in'/>
+      <ScrollView horizontal>
+        <AppBarTab title="Repository" path="/" />
+        <AppBarTab title="Sign In" path="/sign-in" />
+      </ScrollView>
     </View>
   );
 };
