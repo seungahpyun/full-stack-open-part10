@@ -8,14 +8,14 @@ const styles = StyleSheet.create({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'stretch',
-      padding: 5,
+      padding: theme.padding.small,
   },
   buttton: {
       backgroundColor: theme.colors.blueColor,
       alignItems: 'center',
-      padding: 15,
-      margin: 8,
-      borderRadius: 5,
+      padding: theme.padding.large,
+      margin: theme.margin.medium,
+      borderRadius: theme.borderRadius.small,
   },
 });
 

@@ -4,6 +4,7 @@ const theme = {
   colors: {
     textPrimary: "#24292e",
     textSecondary: "#586069",
+    textError: "#ff0000",
     primary: "#0366d6",
     backgroundBarColor: "#1E202B",
     backgroundMainColor: "#e1e4e8",
@@ -24,8 +25,16 @@ const theme = {
   padding: {
     paddingTop: Constants.statusBarHeight,
     paddingBottom: 5,
+    small: 5,
+    medium: 10,
+    large: 15,
   },
   margin: {
+    small: 5,
+    medium: 10,
+    large: 15,
+  },
+  borderRadius: {
     small: 5,
     medium: 10,
     large: 15,

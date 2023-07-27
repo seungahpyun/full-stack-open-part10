@@ -6,15 +6,15 @@ import Text from "./Text";
 
 const styles = StyleSheet.create({
   errorText: {
-    marginTop: 5,
+    marginTop: theme.margin.small,
   },
   textInput: {
     borderColor: theme.colors.textSecondary,
     borderStyle: 'solid',
-    padding: 15,
-    margin: 8,
+    padding: theme.padding.large,
+    margin: theme.margin.medium,
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: theme.borderRadius.smalld,
   },
 });
 
