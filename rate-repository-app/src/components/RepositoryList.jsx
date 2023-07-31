@@ -4,6 +4,8 @@ import useRepositories from '../hooks/useRepositories';
 import { Link } from 'react-router-native';
 import React,{ useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
+import { Searchbar } from 'react-native-paper';
+import { useDebounce } from "use-debounce";
 
 const styles = StyleSheet.create({
   separator: {
@@ -54,6 +56,11 @@ const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryList = () => {
     const [ order, setOrder ] = useState('latest');
+    const [ searchQuery, setSearchQuery ] = useState('')
+    const [ searchKeyword ] = useDebounce(searchQuery, 1000);
+
+    const onChangeSearch = query => setSearchQuery(query)
+
 
     let orderBy;
     let orderDirection;
@@ -78,9 +85,22 @@ const RepositoryList = () => {
         break;
 
       }
-    const {repositories} = useRepositories(orderBy, orderDirection);
+    const {repositories} = useRepositories(orderBy, orderDirection, searchKeyword);
 
-  return <RepositoryListContainer repositories={repositories} order={order} setOrder={setOrder} />;
+  return (
+    <>
+      <Searchbar
+        placeholder='Search'
+        onChangeText={onChangeSearch}
+        value={searchQuery}
+      />
+    <RepositoryListContainer
+        repositories={repositories}
+        order={order}
+        setOrder={setOrder}
+      />
+    </>
+  )
 };
 
 export default RepositoryList;
