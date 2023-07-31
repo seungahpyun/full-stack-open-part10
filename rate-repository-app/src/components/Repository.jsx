@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native';
+import { FlatList, View, StyleSheet } from 'react-native';
 import { useParams } from 'react-router-native';
 import * as Linking from 'expo-linking';
 import useRepository from '../hooks/useRepository';
@@ -16,6 +16,17 @@ const styles = StyleSheet.create({
     },
 })
 
+const ReviewItem = ({ review }) => {
+  return (
+    <View>
+      <Text>{review.user.username}</Text>
+      <Text>{review.createdAt}</Text>
+      <Text>{review.text}</Text>
+      <Text>{review.rating}</Text>
+    </View>
+  )
+};
+
 const Repository = () => {
   const { id } = useParams();
   const { repository } = useRepository(id);
@@ -27,6 +38,11 @@ const Repository = () => {
   if (repository) {
     return (
       <View style={styles.languageContainer}>
+        <FlatList
+          data={repository.reviews.edges}
+          renderItem={({ item }) => <ReviewItem review={item.node} />}
+          keyExtractor={({ id }) => id}
+        />
         <RepositoryItem repo={repository} />
         <Text onPress={handlePress} color='colorWhite' fontWeight='bold' style={styles.languageText}>
             Open in GitHub
