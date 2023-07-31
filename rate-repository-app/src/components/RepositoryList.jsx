@@ -1,6 +1,7 @@
 import { View, StyleSheet, FlatList } from 'react-native';
 import RepositoryItem from './RepositoryItem';
 import useRepositories from '../hooks/useRepositories';
+import { Link } from 'react-router-native';
 
 const styles = StyleSheet.create({
   separator: {
@@ -18,7 +19,9 @@ export const RepositoryListContainer = ({ repositories }) => {
         data={repositoryNodes}
         ItemSeparatorComponent={ItemSeparator}
         renderItem={({ item }) => (
-          <RepositoryItem repo={item} />
+          <Link to={`/${item.id}`}>
+            <RepositoryItem key={item.id} repo={item} />
+          </Link>
         )
         }
       />
