@@ -42,7 +42,7 @@ const roundNum = (num) => {
 
 const RepositoryItem = ({ repo }) => {
   return (
-    <View style={styles.container}>
+    <View testID="repositoryItem" style={styles.container}>
       <View style={styles.topRow}>
         <Image style={styles.image} source={{ uri: repo.ownerAvatarUrl }} />
         <View style={{ marginBottom: 10 }}>
