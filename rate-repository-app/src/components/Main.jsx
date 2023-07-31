@@ -1,6 +1,7 @@
 import { Route, Routes, Navigate } from 'react-router-native';
 import { StyleSheet, View } from 'react-native';
 import theme from '../theme';
+import CreateReview from './CreateReview';
 import RepositoryList from './RepositoryList';
 import Repository from './Repository';
 import SignIn from './SignIn';
@@ -24,6 +25,7 @@ const Main = () => {
         <Route path='/sign-out' element={<SignIn />} exact />
         <Route path="*" element={<Navigate to="/" replace />} />
         <Route path="/:id" element={<Repository />} />
+        <Route path="/create-review" element={<CreateReview />} />
       </Routes>
     </View>
   );
