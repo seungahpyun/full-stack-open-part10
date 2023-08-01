@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export const RepositoryListContainer = ({ repositories , order, setOrder }) => {
+export const RepositoryListContainer = ({ repositories , order, setOrder, onEndReach }) => {
   const repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
     : [];
@@ -47,6 +47,8 @@ export const RepositoryListContainer = ({ repositories , order, setOrder }) => {
             </Picker>
           </View>
         }
+        onEndReached={onEndReach}
+        onEndReachedThreshold={0.5}
       />
     );
   };
@@ -55,37 +57,39 @@ const ItemSeparator = () => <View style={styles.separator} />;
 
 
 const RepositoryList = () => {
-    const [ order, setOrder ] = useState('latest');
-    const [ searchQuery, setSearchQuery ] = useState('')
-    const [ searchKeyword ] = useDebounce(searchQuery, 1000);
+  const [ order, setOrder ] = useState('latest');
+  const [ searchQuery, setSearchQuery ] = useState('')
+  const [ searchKeyword ] = useDebounce(searchQuery, 1000);
 
-    const onChangeSearch = query => setSearchQuery(query)
+  const onChangeSearch = query => setSearchQuery(query)
 
+  let orderBy;
+  let orderDirection;
+  let first;
 
-    let orderBy;
-    let orderDirection;
+  switch(order){
+    case 'latest':
+      orderBy = 'CREATED_AT';
+      orderDirection = 'DESC';
+      first = 4;
+      break;
 
-    switch(order){
-      case 'latest':
+    case 'highestRated':
+      orderBy = 'RATING_AVERAGE';
+      orderDirection = 'DESC';
+      first = 4;
+      break;
 
-        orderBy = 'CREATED_AT';
-        orderDirection = 'DESC';
-        break;
+    case 'lowestRated':
+      orderBy = 'RATING_AVERAGE';
+      orderDirection = 'ASC';
+      first = 4;
+      break;
 
-      case 'highestRated':
+    }
+  const {repositories, fetchMore} = useRepositories(orderBy, orderDirection, searchKeyword, first);
 
-        orderBy = 'RATING_AVERAGE';
-        orderDirection = 'DESC';
-        break;
-
-      case 'lowestRated':
-
-        orderBy = 'RATING_AVERAGE';
-        orderDirection = 'ASC';
-        break;
-
-      }
-    const {repositories} = useRepositories(orderBy, orderDirection, searchKeyword);
+  const onEndReach = () => { fetchMore() };
 
   return (
     <>
@@ -98,6 +102,7 @@ const RepositoryList = () => {
         repositories={repositories}
         order={order}
         setOrder={setOrder}
+        onEndReach={onEndReach}
       />
     </>
   )

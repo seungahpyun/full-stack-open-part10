@@ -29,11 +29,15 @@ const ReviewItem = ({ review }) => {
 
 const Repository = () => {
   const { id } = useParams();
-  const { repository } = useRepository(id);
+  const { repository, fetchMore } = useRepository(id,4);
 
   const handlePress = () => {
     Linking.openURL(repository.url);
   };
+
+  const onEndReach = () => {
+    fetchMore()
+  }
 
   if (repository) {
     return (
@@ -42,6 +46,8 @@ const Repository = () => {
           data={repository.reviews.edges}
           renderItem={({ item }) => <ReviewItem review={item.node} />}
           keyExtractor={({ id }) => id}
+          onEndReached={onEndReach}
+          onEndReachedThreshold={0.5}
         />
         <RepositoryItem repo={repository} />
         <Text onPress={handlePress} color='colorWhite' fontWeight='bold' style={styles.languageText}>
